@@ -1,0 +1,54 @@
+<div class="blog_posts stander_blog one_colo_stander_blog">
+  <article *ngFor="let sujet of Sujets.reverse()">
+    <h3 class="post_title">
+      <a routerLink="/accueil/sujet/{{sujet._id}}">{{sujet.titre}}</a>
+    </h3>
+    <div *ngIf="sujet.shown">
+      <div *ngFor="let vote of sujet.vote">
+        <form [formGroup]="voteForm" *ngIf="vote.show">
+          <div class="row">
+            <a (click)="ajouterVote('oui', sujet._id)">
+              <img src="../../../assets/images/icons8-thumbs-up-32.png">
+            </a>
+            <a (click)="ajouterVote('non', sujet._id)">
+              <img src="../../../assets/images/icons8-thumbs-down-32.png">
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="sujet.shown && sujet.vote.length == 0">
+        <div >
+          <form [formGroup]="voteForm">
+            <div class="row">
+              <a (click)="ajouterVote('oui', sujet._id)">
+                <img src="../../../assets/images/icons8-thumbs-up-32.png">
+              </a>
+              <a (click)="ajouterVote('non', sujet._id)">
+                <img src="../../../assets/images/icons8-thumbs-down-32.png">
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    <div class="post_meta_top">
+      <span class="post_meta_category">
+        <a>Votes: {{sujet.vote.length}}</a>
+      </span>
+      <span class="post_meta_date">{{sujet.addedDate | date}}</span>
+    </div>
+    <div class="post_content">
+      <p>{{sujet.description}}
+      </p>
+    </div>
+    <div class="post_meta_bottom">
+      <div class="row">
+        <div class="col-md-6">
+          <a class="post_read_more d-block" routerLink="/accueil/sujet/{{sujet._id}}">Lire la suite
+            <i class="far fa-long-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>

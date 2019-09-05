@@ -1,0 +1,51 @@
+<div class="page-container scene-main scene-main--fade_In">
+  <!-- Blog post -->
+  <div class="container mb-65px">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 mt-10px">
+        <div class="blog_posts stander_blog_single_post">
+          <article *ngFor="let sujet of results">
+            <h3 class="post_title">
+              <a>{{sujet.titre}}</a>
+            </h3>
+            <div *ngIf="shown">
+              <form [formGroup]="voteForm" *ngIf="show">
+                <div class="row">
+                  <a (click)="ajouterVote('oui')">
+                    <img src="../../../assets/images/icons8-thumbs-up-32.png">
+                  </a>
+                  <a (click)="ajouterVote('non')">
+                    <img src="../../../assets/images/icons8-thumbs-down-32.png">
+                  </a>
+                </div>
+              </form>
+            </div>
+            <div class="post_meta_top">
+              <span class="post_meta_category">
+                <a>Auteur : {{sujet.auteur.nom}} {{sujet.auteur.prenom}}</a>
+              </span>
+            </div>
+            <div class="post_meta_top">
+              <span class="post_meta_category">
+
+                <a>Votes: {{sujet.vote.length}}
+                </a>
+
+              </span>
+              <span class="post_meta_date">{{sujet.addedDate | date}}</span>
+              <br>
+              <a *ngIf="sujet.vote.length !== 0">
+                oui {{((votesOui/numVotes)*100) }}%
+                non {{((votesNon/numVotes)*100) }}%
+              </a>
+            </div>
+            <div class="post_content">
+              <p>{{sujet.description}}
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
